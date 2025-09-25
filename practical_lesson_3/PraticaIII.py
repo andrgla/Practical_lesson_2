@@ -34,6 +34,15 @@ if __name__ == "__main__":
     
     #gera o arquivo Cuif.1
     cuif.save('lena1.cuif')
+
+    # Open CUIF file
+    cuif_image = Cuif.openCUIF('lena1.cuif')
+    
+    cuif_image.show()
+    
+    # Convert CUIF to BMP and display
+    cuif_image.saveBMP("temp_display.bmp")
+    cuif_image.show()  # This will display the actual CUIF image
     
     #Abre um arquivo Cuif e gera o objeto Cuif
     cuif1 = Cuif.openCUIF('lena1.cuif')
