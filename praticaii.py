@@ -58,7 +58,7 @@ def reduzirPara3Bits(img):
     for i in range(img_3bits.size[0]):
         for j in range(img_3bits.size[1]):
             # Get the original RGB values
-            r, g, b = img.getpixel((i, j))
+            (r, g, b, _) = img.getpixel((i, j))
             
             # Keep only the 3 most significant bits for each component
             # This is done by shifting right by 5 bits (8-3=5) and then left by 5 bits
@@ -78,6 +78,23 @@ def reduzirPara3Bits(img):
 # As shown in the example below, the pixels (i, j) in image R should represent a 
 # shade of red equal to the R component of the pixels (i, j) in the original image. Likewise, 
 # images G and B should contain the green and blue intensities of the pixels in the original image.
+
+def dividirCanais(img):
+    img_r = Image.new( "RGB", (img.size[0], img.size[1]))
+    raster_r = img_r.load()
+    img_g = Image.new( "RGB", (img.size[0], img.size[1]))
+    raster_g = img_g.load()
+    img_b = Image.new( "RGB", (img.size[0], img.size[1]))
+    raster_b = img_b.load()
+    for i in range(img.size[0]):
+        for j in range(img.size[1]):
+            (r, g, b, _) = img.getpixel((i, j))
+            raster_r[i,j] = (r, 0, 0)
+            raster_g[i,j] = (0, g, 0)
+            raster_b[i,j] = (0, 0, b)
+    
+    
+    return img_r, img_g, img_b
 
 def criarImagemRGB():
     img = Image.new( "RGB", (512,256))
@@ -141,3 +158,8 @@ blackAndWhite(img).show()
 print("Task 4: Reducing image to 3 bits per pixel...")
 img_3bits = reduzirPara3Bits(img)
 img_3bits.show()
+
+# Task 5: Split image into 3 channels
+dividirCanais(img)[0].show()
+dividirCanais(img)[1].show()
+dividirCanais(img)[2].show()

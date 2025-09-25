@@ -11,12 +11,15 @@ def PSNR(original,decodificada,b):
         return "Infinito"
 
 def MSE(ori, dec):
+    mean = 0
     nsymbols = ori.width * ori.height * 3
     for i in range(ori.width):
         for j in range(ori.height):
             ori_r, ori_g, ori_b = ori.getpixel((i, j))
             dec_r, dec_g, dec_b = dec.getpixel((i, j))
-    return 0
+            mean =  mean + (math.pow((ori_r - dec_r), 2)) + (math.pow((ori_g - dec_g), 2)) + (math.pow((ori_b - dec_b), 2))
+    mean = mean / nsymbols
+    return mean
 
 if __name__ == "__main__":
     filepath = 'practical_lesson_3/lena.bmp'
@@ -42,16 +45,16 @@ if __name__ == "__main__":
     cuif_image.show()  # This will display the actual CUIF image
     
     #Abre um arquivo Cuif e gera o objeto Cuif
-    #cuif1 = Cuif.openCUIF('lena1.cuif')
+    cuif1 = Cuif.openCUIF('lena1.cuif')
     
     # Converte arquivo Cuif em BMP e mostra
-    #cuif1.saveBMP("lena1.bmp")
-    #cuif1.show()
-    #img1 = Image.open("lena1.bmp")
+    cuif1.saveBMP("lena1.bmp")
+    cuif1.show()
+    img1 = Image.open("lena1.bmp")
 
     # Cálculo do PSNR
-    #psnr = PSNR(img, img1, 8)
-    #print(f'Cálculo do PSNR: {psnr}')
+    psnr = PSNR(img, img1, 8)
+    print(f'Cálculo do PSNR: {psnr}')
 
   
 
