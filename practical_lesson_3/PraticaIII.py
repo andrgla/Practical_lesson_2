@@ -19,7 +19,7 @@ def MSE(ori, dec):
             dec_r, dec_g, dec_b = dec.getpixel((i, j))
             mean =  mean + (math.pow((ori_r - dec_r), 2)) + (math.pow((ori_g - dec_g), 2)) + (math.pow((ori_b - dec_b), 2))
     mean = mean / nsymbols
-    return 0
+    return mean
 
 if __name__ == "__main__":
     filepath = 'practical_lesson_3/lena.bmp'
